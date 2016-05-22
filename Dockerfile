@@ -1,6 +1,15 @@
 # Pull base image
 FROM daocloud.io/library/centos:latest
-MAINTAINER Cdoco <ocdoco@gmail.com>
+#  Thanks Cdoco <cdoco@gmail.com>
+MAINTAINER Leepin <admin@cxsir.com>
+
+# VOLUME
+VOLUME /opt
+
+# Add a user
+RUN set -x \
+    groupadd www
+    && useradd www -M -s /sbin/nologin -g www
 
 # Update source
 RUN set -x \
@@ -49,6 +58,8 @@ RUN set -x \
     && cd nginx-1.10.0 \
     && './configure' \
        '--prefix=/opt/source/nginx' \
+       '--user=www' \
+       '--group=www' \
        '--with-debug' \
        '--with-openssl=/opt/data/openssl-1.0.2h' \
        '--with-zlib=/opt/data/zlib-1.2.8' \
@@ -86,14 +97,16 @@ RUN set -x \
 
 RUN set -x \
     && cd /opt/data \
-    && wget http://cn2.php.net/distributions/php-7.0.5.tar.gz \
-    && tar zxvf php-7.0.5.tar.gz \
-    && cd php-7.0.5 \
+    && wget http://cn2.php.net/distributions/php-7.0.6.tar.gz \
+    && tar zxvf php-7.0.6.tar.gz \
+    && cd php-7.0.6 \
     && './configure' \
        '--prefix=/opt/source/php/' \
        '--with-config-file-path=/opt/source/php/etc/' \
        '--with-config-file-scan-dir=/opt/source/php/conf.d/' \
        '--enable-fpm' \
+       '--with-fpm-user=www' \
+       '--with-fpm-group=www' \
        '--enable-cgi' \
        '--disable-phpdbg' \
        '--enable-mbstring' \

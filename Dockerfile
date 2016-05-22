@@ -11,7 +11,7 @@ RUN set -x \
 # Update source
 RUN set -x \
     && yum update -y \
-    && yum install wget gcc gcc-c++ make perl tar -y \
+    && yum install wget gcc gcc-c++ make perl tar git -y \
     && yum clean all \
     && mkdir /opt/data \
     && mkdir /opt/source
@@ -144,9 +144,29 @@ ADD files/php/www.conf /opt/source/php/etc/php-fpm.d/www.conf
 
 # Install Composer
 RUN set -x \
-    && /opt/source/php/bin/php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && /opt/source/php/bin/php composer-setup.php --install-dir=/usr/bin  --filename=composer \
-    && /opt/source/php/bin/php -r "unlink('composer-setup.php');"
+    && ln -s /opt/source/php/bin/php /usr/bin/php \
+    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php --install-dir=/usr/bin  --filename=composer \
+    && php -r "unlink('composer-setup.php');"
+
+# Install MongoDB PHP extension
+RUN set -x \
+    && cd \opt\data \
+    && wget https://github.com/mongodb/mongo-php-driver/archive/1.1.6.tar.gz \
+    && tar zvxf 1.1.6.tar.gz \
+    && cd mongo-php-driver-1.1.6 \
+    && /opt/source/php/bin/phpize \
+    && ./configure --with-php-config=/opt/source/php/bin/php-config \
+    && make && make install
+
+# Install Redis PHP extension
+RUN set -x \
+    && cd \opt\data \
+    && git clone -b php7 https://github.com/phpredis/phpredis.git \
+    && cd phpredis \
+    && /opt/source/php/bin/phpize \
+    && ./configure --with-php-config=/opt/source/php/bin/php-config \
+    && make && make install
 
 # add nginx conf
 ADD files/nginx/nginx.conf /opt/source/nginx/conf/nginx.conf

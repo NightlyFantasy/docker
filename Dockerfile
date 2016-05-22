@@ -144,9 +144,10 @@ ADD files/php/www.conf /opt/source/php/etc/php-fpm.d/www.conf
 
 # Install Composer
 RUN set -x \
-    && /opt/source/php/bin/php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && /opt/source/php/bin/php composer-setup.php --install-dir=/usr/bin  --filename=composer \
-    && /opt/source/php/bin/php -r "unlink('composer-setup.php');"
+    && ln -s /usr/bin/php /opt/source/php/bin/php
+    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php --install-dir=/usr/bin  --filename=composer \
+    && php -r "unlink('composer-setup.php');"
 
 # add nginx conf
 ADD files/nginx/nginx.conf /opt/source/nginx/conf/nginx.conf

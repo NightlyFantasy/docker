@@ -144,7 +144,7 @@ ADD files/php/www.conf /opt/source/php/etc/php-fpm.d/www.conf
 
 # Install Composer
 RUN set -x \
-    && ln -s /opt/source/php/bin/php /usr/bin/php
+    && ln -s /opt/source/php/bin/php /usr/bin/php \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/bin  --filename=composer \
     && php -r "unlink('composer-setup.php');"

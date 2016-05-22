@@ -11,7 +11,7 @@ RUN set -x \
 # Update source
 RUN set -x \
     && yum update -y \
-    && yum install wget gcc gcc-c++ make perl tar automake autoconf libtool -y \
+    && yum install wget gcc gcc-c++ make perl tar git automake autoconf libtool -y \
     && yum clean all \
     && mkdir /opt/data \
     && mkdir /opt/source
@@ -162,9 +162,8 @@ RUN set -x \
 # Install Redis PHP extension
 RUN set -x \
     && cd /opt/data \
-    && wget https://pecl.php.net/get/redis-2.2.7.tgz \
-    && tar zvxf redis-2.2.7.tgz \
-    && cd redis-2.2.7 \
+    && git clone -b php7 https://github.com/phpredis/phpredis.git \
+    && cd phpredis \
     && /opt/source/php/bin/phpize \
     && ./configure --with-php-config=/opt/source/php/bin/php-config \
     && make && make install

@@ -133,7 +133,7 @@ RUN set -x \
        '--with-mysqli=mysqlnd' \
        '--with-pdo-mysql=mysqlnd' \
        '--with-zlib' \
-       '--with-gettext=' \
+       '--with-gettext' \
     && make \
     && make install
 
@@ -141,6 +141,12 @@ RUN set -x \
 ADD files/php/php.ini /opt/source/php/etc/php.ini
 ADD files/php/php-fpm.conf /opt/source/php/etc/php-fpm.conf
 ADD files/php/www.conf /opt/source/php/etc/php-fpm.d/www.conf
+
+# Install Composer
+RUN set -x \
+    && /opt/source/php/bin/php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && /opt/source/php/bin/php composer-setup.php --install-dir=/usr/bin  --filename=composer \
+    && /opt/source/php/bin/php -r "unlink('composer-setup.php');"
 
 # add nginx conf
 ADD files/nginx/nginx.conf /opt/source/nginx/conf/nginx.conf
@@ -157,6 +163,7 @@ RUN set -x \
 
 RUN set -x \
     && mkdir /opt/source/www \
+    && chown www:www -R /opt/source/www \
     && echo "<?php phpinfo();?>" > /opt/source/www/index.php
 
 # delete data dir

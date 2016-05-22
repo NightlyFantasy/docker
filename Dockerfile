@@ -8,7 +8,7 @@ VOLUME /opt
 
 # Add a user
 RUN set -x \
-    groupadd www \
+    && roupadd www \
     && useradd www -M -s /sbin/nologin -g www
 
 # Update source

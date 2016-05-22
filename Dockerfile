@@ -11,7 +11,7 @@ RUN set -x \
 # Update source
 RUN set -x \
     && yum update -y \
-    && yum install wget gcc gcc-c++ make perl tar git -y \
+    && yum install wget gcc gcc-c++ make perl tar gitn autoconf -y \
     && yum clean all \
     && mkdir /opt/data \
     && mkdir /opt/source

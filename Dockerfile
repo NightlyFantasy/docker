@@ -151,7 +151,7 @@ RUN set -x \
 
 # Install MongoDB PHP extension
 RUN set -x \
-    && cd \opt\data \
+    && cd /opt/data \
     && wget https://github.com/mongodb/mongo-php-driver/archive/1.1.6.tar.gz \
     && tar zvxf 1.1.6.tar.gz \
     && cd mongo-php-driver-1.1.6 \
@@ -161,7 +161,7 @@ RUN set -x \
 
 # Install Redis PHP extension
 RUN set -x \
-    && cd \opt\data \
+    && cd /opt/data \
     && git clone -b php7 https://github.com/phpredis/phpredis.git \
     && cd phpredis \
     && /opt/source/php/bin/phpize \

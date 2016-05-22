@@ -3,9 +3,6 @@ FROM daocloud.io/library/centos:latest
 #  Thanks Cdoco <cdoco@gmail.com>
 MAINTAINER Leepin <admin@cxsir.com>
 
-# VOLUME
-VOLUME /opt
-
 # Add a user
 RUN set -x \
     && groupadd www \

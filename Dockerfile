@@ -163,6 +163,7 @@ RUN set -x \
 RUN set -x \
     && cd /opt/data \
     && wget https://pecl.php.net/get/redis-2.2.7.tgz \
+    && tar zvxf redis-2.2.7.tgz \
     && cd redis-2.2.7 \
     && /opt/source/php/bin/phpize \
     && ./configure --with-php-config=/opt/source/php/bin/php-config \

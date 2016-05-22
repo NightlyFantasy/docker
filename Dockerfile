@@ -11,7 +11,7 @@ RUN set -x \
 # Update source
 RUN set -x \
     && yum update -y \
-    && yum install wget gcc gcc-c++ make perl tar gitn autoconf -y \
+    && yum install wget gcc gcc-c++ make perl tar automake autoconf libtool -y \
     && yum clean all \
     && mkdir /opt/data \
     && mkdir /opt/source
@@ -152,9 +152,9 @@ RUN set -x \
 # Install MongoDB PHP extension
 RUN set -x \
     && cd /opt/data \
-    && wget https://github.com/mongodb/mongo-php-driver/archive/1.1.6.tar.gz \
-    && tar zvxf 1.1.6.tar.gz \
-    && cd mongo-php-driver-1.1.6 \
+    && wget https://pecl.php.net/get/mongodb-1.1.6.tgz \
+    && tar zvxf mongodb-1.1.6.tgz \
+    && cd mongodb-1.1.6 \
     && /opt/source/php/bin/phpize \
     && ./configure --with-php-config=/opt/source/php/bin/php-config \
     && make && make install
@@ -162,8 +162,8 @@ RUN set -x \
 # Install Redis PHP extension
 RUN set -x \
     && cd /opt/data \
-    && git clone -b php7 https://github.com/phpredis/phpredis.git \
-    && cd phpredis \
+    && https://pecl.php.net/get/redis-2.2.7.tgz \
+    && cd redis-2.2.7 \
     && /opt/source/php/bin/phpize \
     && ./configure --with-php-config=/opt/source/php/bin/php-config \
     && make && make install

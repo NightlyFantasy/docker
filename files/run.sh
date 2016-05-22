@@ -6,3 +6,6 @@ set -e -x
 
 # start nginx
 /opt/source/nginx/sbin/nginx
+
+# Nginx access log
+tail -f /opt/source/logs/nginx/access.log

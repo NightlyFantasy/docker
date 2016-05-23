@@ -24,7 +24,7 @@ RUN set -x \
     && tar zxvf zlib-1.2.8.tar.gz \
     && cd zlib-1.2.8 \
     && ./configure --static --prefix=/opt/source/libs/zlib \
-    && make \
+    && make -j \
     && make install
 
 # Install openssl
@@ -34,7 +34,7 @@ RUN set -x \
     && tar zxvf openssl-1.0.2h.tar.gz \
     && cd openssl-1.0.2h \
     && ./config --prefix=/opt/source/libs/openssl -L/opt/source/libs/zlib/lib -I/opt/source/libs/zlib/include threads zlib enable-static-engine\
-    && make \
+    && make -j \
     && make install
 
 # Install pcre
@@ -44,7 +44,7 @@ RUN set -x \
     && tar zxvf pcre-8.38.tar.gz \
     && cd pcre-8.38 \
     && ./configure --prefix=/opt/source/libs/pcre \
-    && make \
+    && make -j \
     && make install
 
 # Install nginx
@@ -68,7 +68,7 @@ RUN set -x \
        '--with-http_v2_module' \
        '--with-http_realip_module' \
        '--with-http_sub_module' \
-    && make \
+    && make -j \
     && make install
 
 # Install php
@@ -89,7 +89,7 @@ RUN set -x \
     && tar zxvf libmcrypt-2.5.7.tar.gz \
     && cd libmcrypt-2.5.7 \
     && ./configure \
-    && make \
+    && make -j \
     && make install
 
 RUN set -x \
@@ -134,7 +134,7 @@ RUN set -x \
        '--with-pdo-mysql=mysqlnd' \
        '--with-zlib' \
        '--with-gettext' \
-    && make \
+    && make -j \
     && make install
 
 # cp php conf
@@ -157,7 +157,8 @@ RUN set -x \
     && cd mongodb-1.1.6 \
     && /opt/source/php/bin/phpize \
     && ./configure --with-php-config=/opt/source/php/bin/php-config \
-    && make && make install
+    && make -j \
+    && make install
 
 # Install Redis PHP extension
 RUN set -x \
@@ -166,7 +167,8 @@ RUN set -x \
     && cd phpredis \
     && /opt/source/php/bin/phpize \
     && ./configure --with-php-config=/opt/source/php/bin/php-config \
-    && make && make install
+    && make -j \
+    && make install
 
 # add nginx conf
 ADD files/nginx/nginx.conf /opt/source/nginx/conf/nginx.conf

@@ -1,6 +1,6 @@
-language: php
+language: python
 php:
-- 7.0.6
+- 2.7
 
 services:
 - docker

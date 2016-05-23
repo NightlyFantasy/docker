@@ -1,5 +1,7 @@
 ### Docker
 
+[![Build Status](https://travis-ci.org/Leepin/docker.svg)](https://travis-ci.org/Leepin/docker)
+
 #### Software
 
 * CentOS 7 latest

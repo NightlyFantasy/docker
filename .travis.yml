@@ -1,0 +1,13 @@
+language: php
+php:
+- 7.0
+
+services:
+- docker
+
+install:
+- docker build -t webserver .
+- docker run --name php -d -p 80:80 webserver
+
+script:
+- docker ps | grep -q php

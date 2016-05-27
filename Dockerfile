@@ -94,9 +94,9 @@ RUN set -x \
 
 RUN set -x \
     && cd /opt/data \
-    && wget http://cn2.php.net/distributions/php-7.0.6.tar.gz \
-    && tar zxvf php-7.0.6.tar.gz \
-    && cd php-7.0.6 \
+    && wget http://cn2.php.net/distributions/php-7.0.7.tar.gz \
+    && tar zxvf php-7.0.7.tar.gz \
+    && cd php-7.0.7 \
     && './configure' \
        '--prefix=/opt/source/php/' \
        '--with-config-file-path=/opt/source/php/etc/' \

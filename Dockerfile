@@ -50,9 +50,9 @@ RUN set -x \
 # Install nginx
 RUN set -x \
     && cd /opt/data \
-    && wget http://nginx.org/download/nginx-1.10.0.tar.gz \
-    && tar zxvf nginx-1.10.0.tar.gz \
-    && cd nginx-1.10.0 \
+    && wget http://nginx.org/download/nginx-1.10.1.tar.gz \
+    && tar zxvf nginx-1.10.1.tar.gz \
+    && cd nginx-1.10.1 \
     && './configure' \
        '--prefix=/opt/source/nginx' \
        '--user=www' \

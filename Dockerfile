@@ -115,6 +115,8 @@ RUN set -x \
        '--enable-shmop' \
        '--enable-sockets' \
        '--with-gd' \
+       '--with-freetype-dir=/usr/include/freetype2/freetype'
+       '--enable-bcmath' \
        '--with-jpeg-dir' \
        '--with-png-dir' \
        '--with-xpm-dir' \
@@ -185,9 +187,7 @@ RUN set -x \
 
 RUN set -x \
     && mkdir /opt/source/www \
-    && chown www:www -R /opt/source/www \
-    && echo "<?php phpinfo();?>" > /opt/source/www/index.php
-
+    && chown www:www -R /opt/source/www
 # delete data dir
 RUN set -x \
     && rm -rf /opt/data

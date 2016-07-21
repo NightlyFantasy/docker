@@ -116,7 +116,6 @@ RUN set -x \
        '--enable-sockets' \
        '--with-gd' \
        '--with-freetype-dir=/usr/include/freetype2/freetype'
-       '--enable-bcmath' \
        '--with-jpeg-dir' \
        '--with-png-dir' \
        '--with-xpm-dir' \

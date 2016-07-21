@@ -173,7 +173,7 @@ RUN set -x \
 
 # add nginx conf
 ADD files/nginx/nginx.conf /opt/source/nginx/conf/nginx.conf
-ADD files/nginx/default.conf /opt/source/nginx/conf/vhost/default.conf
+ADD files/nginx/vhost.conf /opt/source/nginx/conf/vhost/vhost.conf
 RUN set -x \
     && mkdir /opt/source/logs \
     && mkdir /opt/source/logs/nginx \

@@ -115,7 +115,7 @@ RUN set -x \
        '--enable-shmop' \
        '--enable-sockets' \
        '--with-gd' \
-       '--with-freetype-dir=/usr/include/freetype2/freetype'
+       '--with-freetype-dir=/usr/include/freetype2/freetype' \
        '--with-jpeg-dir' \
        '--with-png-dir' \
        '--with-xpm-dir' \

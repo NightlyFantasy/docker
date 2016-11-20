@@ -113,6 +113,7 @@ RUN set -x \
        '--enable-soap' \
        '--enable-zip' \
        '--enable-shmop' \
+       '--enable-bcmath' \
        '--enable-sockets' \
        '--with-gd' \
        '--with-freetype-dir=/usr/include/freetype2/freetype' \
